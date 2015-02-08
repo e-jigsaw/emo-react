@@ -7,11 +7,17 @@ emo impremented by react
 
 # Usage
 
-# Installation
+[Emo](http://emo.jgs.me) is a Emoji search by Japanese. It is experimental imprement by [Riotjs](https://muut.com/riotjs/). This repository is imprement by [React](https://github.com/facebook/react).
 
 # Requirements
 
+* Node.js
+
 # Build
+
+```
+% npm run build
+```
 
 # Author
 
