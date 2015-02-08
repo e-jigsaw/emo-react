@@ -6,6 +6,8 @@ deploy = require 'gulp-gh-pages'
 browserify = require 'browserify'
 coffeeify = require 'coffeeify'
 source = require 'vinyl-source-stream'
+gulpif = require 'gulp-if'
+uglify = require 'gulp-uglify'
 
 paths =
   jade: 'src/*.jade'
@@ -29,6 +31,7 @@ gulp.task 'browserify', ->
     extensions: ['.coffee']
   .bundle()
   .pipe source 'index.js'
+  .pipe gulpif(process.env.CI is 'true', uglify())
   .pipe gulp.dest paths.dest
 
 gulp.task 'default', ['jade', 'styl', 'browserify']
