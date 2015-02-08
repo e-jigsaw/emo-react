@@ -6,6 +6,7 @@ deploy = require 'gulp-gh-pages'
 browserify = require 'browserify'
 coffeeify = require 'coffeeify'
 source = require 'vinyl-source-stream'
+buffer = require 'vinyl-buffer'
 gulpif = require 'gulp-if'
 uglify = require 'gulp-uglify'
 
@@ -31,6 +32,7 @@ gulp.task 'browserify', ->
     extensions: ['.coffee']
   .bundle()
   .pipe source 'index.js'
+  .pipe gulpif(process.env.CI is 'true', buffer())
   .pipe gulpif(process.env.CI is 'true', uglify())
   .pipe gulp.dest paths.dest
 
