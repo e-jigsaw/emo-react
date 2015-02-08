@@ -9,6 +9,10 @@ module.exports = React.createClass
     React.DOM.span
       key: emoji.name
       className: "emo emo-margin emoji s_#{@correctName emoji.name}"
+      'data-emoji-name': emoji.name
+      'data-emoji-keywords': emoji.keywords
+      'data-emoji-unicode': emoji.unicode
+      onClick: @props.show
 
   render: ->
     React.DOM.div
