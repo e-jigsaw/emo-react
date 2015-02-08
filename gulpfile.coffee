@@ -42,7 +42,7 @@ gulp.task 'watch', ['default'], ->
   conn.server
     root: 'build'
 
-gulp.task 'deploy', ['default'], ->
+gulp.task 'deploy', ->
   gulp.src './build/*'
     .pipe deploy
       cacheDir: 'tmp'
