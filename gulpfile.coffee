@@ -1,9 +1,11 @@
 gulp = require 'gulp'
 jade = require 'gulp-jade'
-coffee = require 'gulp-coffee'
 styl = require 'gulp-stylus'
 conn = require 'gulp-connect'
 deploy = require 'gulp-gh-pages'
+browserify = require 'browserify'
+coffeeify = require 'coffeeify'
+source = require 'vinyl-source-stream'
 
 paths =
   jade: 'src/*.jade'
@@ -16,21 +18,24 @@ gulp.task 'jade', ->
     .pipe jade()
     .pipe gulp.dest(paths.dest)
 
-gulp.task 'coffee', ->
-  gulp.src paths.coffee
-    .pipe coffee()
-    .pipe gulp.dest(paths.dest)
-
 gulp.task 'styl', ->
   gulp.src paths.styl
     .pipe styl()
     .pipe gulp.dest(paths.dest)
 
-gulp.task 'default', ['jade', 'styl', 'coffee']
+gulp.task 'browserify', ->
+  browserify
+    entries: ['./src/index.coffee']
+    extensions: ['.coffee']
+  .bundle()
+  .pipe source 'index.js'
+  .pipe gulp.dest paths.dest
+
+gulp.task 'default', ['jade', 'styl', 'browserify']
 gulp.task 'watch', ['default'], ->
   gulp.watch paths.jade, ['jade']
   gulp.watch paths.styl, ['styl']
-  gulp.watch paths.coffee, ['coffee']
+  gulp.watch paths.coffee, ['browserify']
   conn.server
     root: 'build'
 
