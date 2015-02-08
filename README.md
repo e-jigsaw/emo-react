@@ -1,5 +1,7 @@
-emo-react
+http://e-jigsaw.github.io/emo-react/
 =========
+
+[![devDependency Status](https://david-dm.org/e-jigsaw/emo-react/dev-status.svg)](https://david-dm.org/e-jigsaw/emo-react#info=devDependencies) [![wercker status](https://app.wercker.com/status/fe5b5da9a34f87abe1ef62a9025bfd4f/s/master "wercker status")](https://app.wercker.com/project/bykey/fe5b5da9a34f87abe1ef62a9025bfd4f)
 
 emo impremented by react
 
