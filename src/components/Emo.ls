@@ -3,6 +3,7 @@ require! {
   \react-redux : {connect}
   \../actions.ls : {get-emojis, search-by-words, select-emoji}
   \./Finder.ls
+  \./Current.ls
   \./Emojis.ls
 }
 
@@ -17,14 +18,19 @@ class Emo extends Component
         create-element do
           Finder
           search-word: @props.search-word
-          onChange: (event)~>
+          on-change: (event)~>
             @props.dispatch search-by-words event.target.value
+        create-element do
+          Current
+          emoji: @props.selected-emoji
+          is-show: @props.is-show-selected-emoji
+          on-click: (text, event)~~>
+            @props.dispatch search-by-words text
         create-element do
           Emojis
           emojis: @props.filtered-emojis
-          onClick: (event)~>
-            console.log event
-            # @props.dispatch select-emoji
+          on-click: (emoji, event)~~>
+            @props.dispatch select-emoji emoji
       ]
 
 module.exports =

@@ -9,7 +9,7 @@ class Finder extends Component
   render: ->
     DOM.form do
       key: \finder-form
-      className: \pure-form
+      class-name: \pure-form
       onsubmit: false
       DOM.input do
         key: \finder-input
@@ -17,6 +17,6 @@ class Finder extends Component
         type: \text
         ref: \input
         value: @props.search-word
-        onChange: @props.onChange
+        on-change: @props.onChange
 
 module.exports = Finder

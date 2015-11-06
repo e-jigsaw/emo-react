@@ -13,6 +13,6 @@ class Emojis extends Component
         DOM.span do
           key: normalize-name emoji.name
           className: "emo emo-margin emoji s_#{normalize-name emoji.name}"
-          onClick: @props.onClick
+          on-click: @props.on-click emoji
 
 module.exports = Emojis

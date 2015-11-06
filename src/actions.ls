@@ -21,16 +21,18 @@ exports.receive-emojis = receive-emojis = (json)->
   type: refs.RECEIVE_EMOJIS
   json: json
 
-exports.get-emojis = -> (dispatch)->
-  fetch \//cdn.rawgit.com/jgsme/emo/gh-pages/data/emojis.json
-    .then (res)-> res.json!
-    .then (json)-> dispatch receive-emojis json
-
-exports.search-by-words = (text, dispatch, get-state)--> dispatch do
+exports.search-by-words = search-by-words = (text, dispatch, get-state)--> dispatch do
   type: refs.SEARCH_BY_WORDS
   text: text
   emojis: get-state!.emojis
 
+exports.get-emojis = -> (dispatch)->
+  fetch \//cdn.rawgit.com/jgsme/emo/gh-pages/data/emojis.json
+    .then (res)-> res.json!
+    .then (json)->
+      dispatch receive-emojis json
+      dispatch search-by-words location.hash.replace /#/, ''
+
 exports.select-emoji = (emoji)->
   type: refs.SELECT_EMOJI
-  text: text
+  emoji: emoji
