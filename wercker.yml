@@ -9,5 +9,5 @@ build:
 deploy:
   steps:
     - lukevivier/gh-pages@0.2.1:
-        token: $github_remote
+        token: $github_token
         basedir: build
