@@ -12,6 +12,7 @@
     "build:bundle": "browserify -t [ @jigsaw/anyify --ls [ livescript?compile ] ] src/index.ls > $npm_package_config_DEST/index.js",
     "build:jade": "jade src/*.jade --out $npm_package_config_DEST",
     "clean": "rm -rf $npm_package_config_DEST",
+    "uglify": "uglifyjs --compress --mangle -- $npm_package_config_DEST/index.js > $npm_package_config_DEST/index.min.js && cat $npm_package_config_DEST/index.min.js > $npm_package_config_DEST/index.js && rm -f $npm_package_config_DEST/index.min.js",
     "serve": "static -p $npm_package_config_PORT $npm_package_config_DEST"
   },
   "author": "jigsaw (http://jgs.me)",
@@ -28,6 +29,7 @@
     "react-dom": "^0.14.2",
     "react-redux": "^4.0.0",
     "redux": "^3.0.4",
-    "redux-thunk": "^1.0.0"
+    "redux-thunk": "^1.0.0",
+    "uglify-js": "^2.5.0"
   }
 }
