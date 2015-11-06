@@ -2,32 +2,32 @@
   "name": "emo-react",
   "version": "0.0.0",
   "description": "emo impremented by react",
+  "config": {
+    "DEST": "build",
+    "PORT": "3000"
+  },
   "scripts": {
-    "build": "./node_modules/.bin/gulp",
-    "deploy": "./node_modules/.bin/gulp deploy"
+    "before": "mkdir -p $npm_package_config_DEST",
+    "build": "npm-run-all before -p build:*",
+    "build:bundle": "browserify -t [ @jigsaw/anyify --ls [ livescript?compile ] ] src/index.ls > $npm_package_config_DEST/index.js",
+    "build:jade": "jade src/*.jade --out $npm_package_config_DEST",
+    "clean": "rm -rf $npm_package_config_DEST",
+    "serve": "static -p $npm_package_config_PORT $npm_package_config_DEST"
   },
   "author": "jigsaw (http://jgs.me)",
   "license": "MIT",
   "devDependencies": {
-    "aja": "^0.3.3",
-    "browserify": "^8.1.3",
-    "coffee-script": "^1.8.0",
-    "coffeeify": "^1.0.0",
-    "gulp": "^3.8.10",
-    "gulp-connect": "^2.2.0",
-    "gulp-gh-pages": "^0.4.0",
-    "gulp-if": "^1.2.5",
-    "gulp-jade": "^0.10.0",
-    "gulp-stylus": "^1.3.4",
-    "gulp-uglify": "^1.1.0",
-    "immutable": "^3.6.2",
-    "react": "^0.12.2",
-    "vinyl-buffer": "^1.0.0",
-    "vinyl-source-stream": "^1.0.0"
-  },
-  "browserify": {
-    "transform": [
-      "coffeeify"
-    ]
+    "@jigsaw/anyify": "^1.0.1",
+    "browserify": "^12.0.1",
+    "isomorphic-fetch": "^2.2.0",
+    "jade": "^1.11.0",
+    "livescript": "^1.4.0",
+    "node-static": "^0.7.7",
+    "npm-run-all": "^1.2.12",
+    "react": "^0.14.2",
+    "react-dom": "^0.14.2",
+    "react-redux": "^4.0.0",
+    "redux": "^3.0.4",
+    "redux-thunk": "^1.0.0"
   }
 }
