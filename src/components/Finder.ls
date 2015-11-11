@@ -8,11 +8,9 @@ class Finder extends Component
 
   render: ->
     DOM.form do
-      key: \finder-form
       class-name: \pure-form
       onsubmit: false
       DOM.input do
-        key: \finder-input
         id: \in
         type: \text
         ref: \input
