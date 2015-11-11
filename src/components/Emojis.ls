@@ -7,11 +7,10 @@ class Emojis extends Component
     normalize-name = (name)-> name.replace /\+/, ''
 
     DOM.div do
-      key: \emojis
       className: \emojis
-      @props.emojis.map (emoji)~>
+      @props.emojis.map (emoji, i)~>
         DOM.span do
-          key: normalize-name emoji.name
+          key: i
           className: "emo emo-margin emoji s_#{normalize-name emoji.name}"
           on-click: @props.on-click emoji
 
