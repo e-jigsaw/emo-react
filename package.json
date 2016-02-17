@@ -1,6 +1,6 @@
 {
   "name": "emo-react",
-  "version": "0.0.0",
+  "private": true,
   "description": "emo impremented by react",
   "config": {
     "DEST": "build",
@@ -9,7 +9,7 @@
   "scripts": {
     "before": "mkdir -p $npm_package_config_DEST",
     "build": "npm-run-all before -p build:*",
-    "build:bundle": "browserify -t [ @jigsaw/anyify --ls [ livescript?compile ] ] src/index.ls > $npm_package_config_DEST/index.js",
+    "build:bundle": "browserify -t [ babelify --plugins [ transform-jade-to-react transform-object-assign ] --presets [ es2015 ] ] -o $npm_package_config_DEST/index.js src/index.js",
     "build:jade": "jade src/*.jade --out $npm_package_config_DEST",
     "clean": "rm -rf $npm_package_config_DEST",
     "uglify": "uglifyjs --compress --mangle -- $npm_package_config_DEST/index.js > $npm_package_config_DEST/index.min.js && cat $npm_package_config_DEST/index.min.js > $npm_package_config_DEST/index.js && rm -f $npm_package_config_DEST/index.min.js",
@@ -18,18 +18,23 @@
   "author": "jigsaw (http://jgs.me)",
   "license": "MIT",
   "devDependencies": {
-    "@jigsaw/anyify": "^1.0.1",
+    "babel-plugin-transform-jade-to-react": "^0.1.0",
+    "babel-plugin-transform-object-assign": "^6.5.0",
+    "babel-preset-es2015": "^6.5.0",
+    "babelify": "^7.2.0",
     "browserify": "^13.0.0",
-    "isomorphic-fetch": "^2.2.0",
+    "es6-promise": "^3.1.2",
+    "flux": "^2.1.1",
+    "isomorphic-fetch": "^2.2.1",
     "jade": "^1.11.0",
     "livescript": "^1.4.0",
     "node-static": "^0.7.7",
-    "npm-run-all": "^1.3.1",
-    "react": "^0.14.2",
-    "react-dom": "^0.14.2",
-    "react-redux": "^4.0.0",
-    "redux": "^3.0.4",
-    "redux-thunk": "^1.0.0",
+    "npm-run-all": "^1.5.1",
+    "react": "^0.14.7",
+    "react-dom": "^0.14.7",
+    "react-redux": "^4.4.0",
+    "redux": "^3.3.1",
+    "redux-thunk": "^1.0.3",
     "uglify-js": "^2.6.1"
   }
 }
