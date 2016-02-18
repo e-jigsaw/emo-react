@@ -1,3 +1,4 @@
+import 'babel-polyfill'
 import fetchShim from 'isomorphic-fetch'
 import promiseShim from 'es6-promise'
 
@@ -34,15 +35,12 @@ const searchByWords = (text) => {
 }
 
 const getEmojis = () => {
-  return (dispatch, getState) => {
-    fetch('//cdn.rawgit.com/jgsme/emo/gh-pages/data/emojis.json')
-      .then((res) => {
-        return res.json()
-      }).then((json) => {
-        const hash = location.hash.replace(/#/, '')
-        dispatch(receiveEmojis(json))
-        dispatch(searchByWords(hash))
-      })
+  return async (dispatch, getState) => {
+    const res = await fetch('//cdn.rawgit.com/jgsme/emo/gh-pages/data/emojis.json')
+    const json = await res.json()
+    const hash = location.hash.replace(/#/, '')
+    dispatch(receiveEmojis(json))
+    dispatch(searchByWords(hash))
   }
 }
 
