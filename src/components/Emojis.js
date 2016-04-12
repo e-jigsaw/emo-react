@@ -1,17 +1,17 @@
 import React, {Component} from 'react'
 import {Container} from 'flux/utils'
-import EmoStore from '../store.js'
+import FilteredEmojis from '../stores/filteredEmojis.js'
 import {dispatch} from '../dispatcher.js'
 import {types, getEmojis} from '../actions.js'
 
 class Emojis extends Component {
   static getStores() {
-    return [EmoStore]
+    return [FilteredEmojis]
   }
 
   static calculateState (prev) {
     return {
-      emojis: EmoStore.getState()
+      emojis: FilteredEmojis.getState()
     }
   }
 
@@ -45,5 +45,4 @@ class Emojis extends Component {
   }
 }
 
-const EmojisContainer = Container.create(Emojis)
-export default EmojisContainer
+export default Container.create(Emojis)
