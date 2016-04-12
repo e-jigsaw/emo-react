@@ -1,14 +1,25 @@
-import 'babel-polyfill'
-import fetchShim from 'isomorphic-fetch'
-import promiseShim from 'es6-promise'
+import {dispatch} from './dispatcher.js'
 
-if (fetch === undefined) {
-  fetch = fetchShim
+const types = [
+  'EMOJIS_RECIEVE',
+  'SELECT_EMOJI',
+  'SEARCH_BY_WORDS'
+].reduce((prev, key) => {
+  prev[key] = Symbol(key)
+  return prev
+}, {})
+
+async function getEmojis () {
+  const res = await fetch('//cdn.rawgit.com/jgsme/emo/gh-pages/data/emojis.json')
+  const emojis = await res.json()
+  const hash = location.hash.replace(/#/, '')
+  dispatch({
+    type: types.EMOJIS_RECIEVE,
+    emojis
+  })
 }
 
-if (Promise === undefined) {
-  Promise = promiseShim
-}
+export {types, getEmojis}
 
 const receiveEmojis = (json) => {
   return {
@@ -32,18 +43,4 @@ const searchByWords = (text) => {
       text, emojis
     })
   }
-}
-
-const getEmojis = () => {
-  return async (dispatch, getState) => {
-    const res = await fetch('//cdn.rawgit.com/jgsme/emo/gh-pages/data/emojis.json')
-    const json = await res.json()
-    const hash = location.hash.replace(/#/, '')
-    dispatch(receiveEmojis(json))
-    dispatch(searchByWords(hash))
-  }
-}
-
-export {
-  receiveEmojis, selectEmoji, searchByWords, getEmojis
 }

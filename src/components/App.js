@@ -1,20 +1,9 @@
 import React from 'react'
-import Finder from '../containers/Finder.js'
-import Current from '../containers/Current.js'
-import Emojis from '../containers/Emojis.js'
-const {Component} = React
+import Emojis from './Emojis.js'
 
-export default class App extends Component {
-  componentDidMount () {
-    this.props.getEmojis()
-  }
-
-  render () {
-    return jade`
-      div
-        Finder
-        Current
-        Emojis
-    `
-  }
+export default function EmoApp () {
+  return jade`
+    div
+      Emojis
+  `
 }

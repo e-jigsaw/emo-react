@@ -1,19 +1,8 @@
-import React from 'react'
+import 'babel-polyfill'
+import 'isomorphic-fetch'
+import 'es6-promise'
+import {createElement} from 'react'
 import {render} from 'react-dom'
-import {Provider} from 'react-redux'
-import {applyMiddleware, createStore} from 'redux'
-import thunkMiddleware from 'redux-thunk'
-import reducers from './reducers.js'
-import App from './containers//App.js'
-const {createElement} = React
+import App from './components/App.js'
 
-const store = applyMiddleware(thunkMiddleware)(createStore)(reducers)
-
-render(
-  createElement(
-    Provider, {
-      store
-    }, createElement(App)
-  ),
-  document.getElementById('app')
-)
+render(createElement(App), document.getElementById('app'))
